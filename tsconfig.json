@@ -1,0 +1,70 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2020",                                  /* Cambiado de es2016 a ES2020 para mejor soporte de features modernas */
+    "lib": ["ES2020"],                                   /* Habilitado para incluir las APIs de ES2020 */
+    "experimentalDecorators": true,                      /* Habilitado para Prisma y posibles decoradores */
+    "emitDecoratorMetadata": true,                       /* Habilitado para metadata de decoradores */
+
+    /* Modules */
+    "module": "commonjs",                                /* Mantener commonjs para Node.js */
+    "rootDir": "./src",                                  /* Habilitado: directorio raíz de archivos fuente */
+    "moduleResolution": "node",                          /* Habilitado para resolución de módulos estilo Node.js */
+    "baseUrl": "./",                                     /* Habilitado para imports absolutos */
+    "paths": {                                           /* Habilitado para alias de paths */
+      "@/": ["src/"],
+      "@/config/": ["src/config/"],
+      "@/controllers/": ["src/controllers/"],
+      "@/services/": ["src/services/"],
+      "@/middleware/": ["src/middleware/"],
+      "@/models/": ["src/models/"],
+      "@/utils/": ["src/utils/"],
+      "@/types/": ["src/types/"]
+    },
+    "resolveJsonModule": true,                           /* Habilitado para importar archivos JSON */
+
+    /* JavaScript Support */
+    "allowJs": true,                                     /* Habilitado para permitir archivos JS */
+    
+    /* Emit */
+    "declaration": true,                                 /* Habilitado para generar archivos .d.ts */
+    "sourceMap": true,                                   /* Habilitado para source maps (debugging) */
+    "outDir": "./dist",                                  /* Habilitado: directorio de salida */
+    "removeComments": true,                              /* Habilitado para reducir tamaño */
+    "noEmitOnError": true,                               /* Habilitado para no emitir si hay errores */
+
+    /* Interop Constraints */
+    "isolatedModules": true,                             /* Habilitado para compatibilidad con bundlers */
+    "allowSyntheticDefaultImports": true,                /* Habilitado para mejor compatibilidad con imports */
+    "esModuleInterop": true,                             /* Ya estaba habilitado - correcto */
+    "forceConsistentCasingInFileNames": true,            /* Ya estaba habilitado - correcto */
+
+    /* Type Checking */
+    "strict": true,                                      /* Ya estaba habilitado - correcto */
+    "noImplicitAny": true,                               /* Habilitado para mejor type safety */
+    "strictNullChecks": true,                            /* Habilitado para null safety */
+    "strictFunctionTypes": true,                         /* Habilitado para type safety en funciones */
+    "noImplicitReturns": true,                           /* Habilitado para asegurar returns explícitos */
+    "noFallthroughCasesInSwitch": true,                  /* Habilitado para evitar casos fallthrough */
+    "noUnusedLocals": true,                              /* Habilitado para detectar variables no usadas */
+    "noUnusedParameters": true,                          /* Habilitado para detectar parámetros no usados */
+    "exactOptionalPropertyTypes": true,                  /* Habilitado para mejor manejo de propiedades opcionales */
+
+    /* Completeness */
+    "skipLibCheck": true                                 /* Ya estaba habilitado - correcto */
+  },
+  "include": [
+    "src/*/",                                          /* Incluir todos los archivos en src */
+    "src/*/.json"                                      /* Incluir archivos JSON en src */
+  ],
+  "exclude": [
+    "node_modules",                                      /* Excluir node_modules */
+    "dist",                                              /* Excluir directorio de build */
+    "*/.test.ts",                                      /* Excluir archivos de test */
+    "*/.spec.ts"                                       /* Excluir archivos de spec */
+  ],
+  "ts-node": {
+    "esm": false,                                        /* Configuración para ts-node */
+    "experimentalSpecifierResolution": "node"
+  }
+}

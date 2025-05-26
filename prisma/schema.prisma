@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Categoria {
+  id       BigInt  @id @default(autoincrement())
+  activo   Boolean?
+  id_tipo  BigInt?
+  nombre   String?
+  Producto Producto[]
+}
+
+model DetalleOrden {
+  id         BigInt @id @default(autoincrement())
+  activo     Boolean?
+  cantidad   Int?
+  orden_id   BigInt?
+  producto_id BigInt?
+  Orden       OrdenDeCompra? @relation(fields: [orden_id], references: [id])
+  Producto    Producto? @relation(fields: [producto_id], references: [id])
+}
+
+model Direccion {
+  id        BigInt @id @default(autoincrement())
+  activo    Boolean?
+  calle     String?
+  cp        String?
+  localidad String?
+  Usuario   UsuarioDireccion[]
+}
+
+model ImagenProducto {
+  id          BigInt @id @default(autoincrement())
+  activo      Boolean?
+  es_principal Boolean?
+  nombre      String?
+  orden       Int?
+  url         String?
+  producto_id BigInt?
+  Producto    Producto? @relation(fields: [producto_id], references: [id])
+}
+
+model OrdenDeCompra {
+  id        BigInt @id @default(autoincrement())
+  activo    Boolean?
+  fecha     DateTime?
+  usuario_id BigInt?
+  Usuario   Usuario? @relation(fields: [usuario_id], references: [id])
+  DetalleOrden DetalleOrden[]
+}
+
+model Producto {
+  id           BigInt @id @default(autoincrement())
+  activo       Boolean?
+  cantidad     Int?
+  color        String?
+  descripcion  String?
+  marca        String?
+  nombre       String?
+  precio       Float?
+  categoria_id BigInt?
+  Categoria    Categoria? @relation(fields: [categoria_id], references: [id])
+  ImagenProducto ImagenProducto[]
+  DetalleOrden DetalleOrden[]
+  TalleProducto TalleProducto[]
+}
+
+model Talle {
+  id        BigInt @id @default(autoincrement())
+  activo    Boolean?
+  tipo_talle String?
+  tipo_id   BigInt?
+  Tipo      Tipo? @relation(fields: [tipo_id], references: [id])
+  TalleProducto TalleProducto[]
+}
+
+model TalleProducto {
+  id          BigInt @id @default(autoincrement())
+  activo      Boolean?
+  producto_id BigInt?
+  talle_id    BigInt?
+  Producto    Producto? @relation(fields: [producto_id], references: [id])
+  Talle       Talle? @relation(fields: [talle_id], references: [id])
+}
+
+model Tipo {
+  id     BigInt @id @default(autoincrement())
+  activo Boolean?
+  nombre String?
+  Talle  Talle[]
+}
+
+model Usuario {
+  id        BigInt @id @default(autoincrement())
+  activo    Boolean?
+  contrasenia String?
+  email     String?
+  nombre    String?
+  rol       String?
+  OrdenDeCompra OrdenDeCompra[]
+  UsuarioDireccion UsuarioDireccion[]
+}
+
+model UsuarioDireccion {
+  id           BigInt @id @default(autoincrement())
+  activo       Boolean?
+  direccion_id BigInt?
+  usuario_id   BigInt?
+  Direccion    Direccion? @relation(fields: [direccion_id], references: [id])
+  Usuario      Usuario? @relation(fields: [usuario_id], references: [id])
+}

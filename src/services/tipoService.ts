@@ -7,7 +7,7 @@ export const getAllTipos = async () => {
   return await prisma.tipo.findMany();
 };
 
-export const getTipoById = async (id: bigint) => {
+export const getTipoById = async (id: number) => {
   return await prisma.tipo.findUnique({ where: { id } });
 };
 
@@ -20,13 +20,17 @@ export const createTipo = async (tipo: ITipo) => {
   });
 };
 
-export const updateTipo = async (id: bigint, tipo: Partial<ITipo>) => {
+export const updateTipo = async (id: number, tipo: Partial<ITipo>) => {
   return await prisma.tipo.update({
     where: { id },
-    data: tipo,
+    data: {
+      ...(tipo.activo !== undefined && { activo: tipo.activo }),
+      ...(tipo.nombre !== undefined && { nombre: tipo.nombre }),
+    },
   });
 };
 
-export const deleteTipo = async (id: bigint) => {
+
+export const deleteTipo = async (id: number) => {
   return await prisma.tipo.delete({ where: { id } });
 };

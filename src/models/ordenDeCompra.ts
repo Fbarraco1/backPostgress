@@ -2,10 +2,10 @@ import { IDetalleOrden } from "./detalleOrden";
 import { IUsuario } from "./usuario";
 
 export interface IOrdenDeCompra {
-  id: bigint;
+  id: number;
   activo?: boolean;
   fecha?: Date;
-  usuario_id?: bigint;
+  usuario_id?: number;
   Usuario?: IUsuario;
   DetalleOrden?: IDetalleOrden[];
 }

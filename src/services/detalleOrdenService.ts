@@ -23,9 +23,11 @@ export const createDetalleOrden = async (detalle: IDetalleOrden) => {
 };
 
 export const updateDetalleOrden = async (id: bigint, detalle: Partial<IDetalleOrden>) => {
+  const { Orden, Producto, ...dataUpdate } = detalle;
+
   return await prisma.detalleOrden.update({
     where: { id },
-    data: detalle,
+    data: dataUpdate,
   });
 };
 

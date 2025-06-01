@@ -4,7 +4,7 @@ import { IImagenProducto } from "./imagenProducto";
 import { ITalleProducto } from "./talleProducto";
 
 export interface IProducto {
-  id: bigint;
+  id: number;
   activo?: boolean;
   cantidad?: number;
   color?: string;
@@ -12,7 +12,7 @@ export interface IProducto {
   marca?: string;
   nombre?: string;
   precio?: number;
-  categoria_id?: bigint;
+  categoria_id?: number;
   Categoria?: ICategoria;
   ImagenProducto?: IImagenProducto[];
   DetalleOrden?: IDetalleOrden[];

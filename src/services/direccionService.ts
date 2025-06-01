@@ -7,7 +7,7 @@ export const getAllDirecciones = async () => {
   return await prisma.direccion.findMany();
 };
 
-export const getDireccionById = async (id: string) => {
+export const getDireccionById = async (id: number) => {
   return await prisma.direccion.findUnique({ where: { id } });
 };
 
@@ -21,13 +21,16 @@ export const createDireccion = async (direccion: IDireccion) => {
   });
 };
 
-export const updateDireccion = async (id: string, direccion: Partial<IDireccion>) => {
+export const updateDireccion = async (id: number, direccion: Partial<IDireccion>) => {
+  const { Usuario, ...dataUpdate } = direccion;
+
   return await prisma.direccion.update({
     where: { id },
-    data: direccion,
+    data: dataUpdate,
   });
 };
 
-export const deleteDireccion = async (id: string) => {
+
+export const deleteDireccion = async (id: number) => {
   return await prisma.direccion.delete({ where: { id } });
 };

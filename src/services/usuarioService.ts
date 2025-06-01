@@ -8,7 +8,7 @@ export const getAllUsuarios = async () => {
   return await prisma.usuario.findMany();
 };
 
-export const getUsuarioById = async (id: bigint) => {
+export const getUsuarioById = async (id: number) => {
   return await prisma.usuario.findUnique({ where: { id } });
 };
 
@@ -28,7 +28,7 @@ export const createUsuario = async (usuario: IUsuario) => {
   });
 };
 
-export const updateUsuario = async (id: bigint, usuario: Partial<IUsuario>) => {
+export const updateUsuario = async (id: number, usuario: Partial<IUsuario>) => {
   if (usuario.contrasenia) {
     usuario.contrasenia = await bcrypt.hash(usuario.contrasenia, 10);
   }
@@ -45,6 +45,6 @@ export const updateUsuario = async (id: bigint, usuario: Partial<IUsuario>) => {
   });
 };
 
-export const deleteUsuario = async (id: bigint) => {
+export const deleteUsuario = async (id: number) => {
   return await prisma.usuario.delete({ where: { id } });
 };

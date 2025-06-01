@@ -7,7 +7,7 @@ export const getAllProductos = async () => {
   return await prisma.producto.findMany();
 };
 
-export const getProductoById = async (id: bigint) => {
+export const getProductoById = async (id: number) => {
   return await prisma.producto.findUnique({ where: { id } });
 };
 
@@ -26,13 +26,23 @@ export const createProducto = async (producto: IProducto) => {
   });
 };
 
-export const updateProducto = async (id: bigint, producto: Partial<IProducto>) => {
+export const updateProducto = async (id: number, producto: Partial<IProducto>) => {
   return await prisma.producto.update({
     where: { id },
-    data: producto,
+    data: {
+      activo: producto.activo,
+      cantidad: producto.cantidad,
+      color: producto.color,
+      descripcion: producto.descripcion,
+      marca: producto.marca,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      ...(producto.categoria_id !== undefined && { categoria_id: producto.categoria_id }),
+    },
   });
 };
 
-export const deleteProducto = async (id: bigint) => {
+
+export const deleteProducto = async (id: number) => {
   return await prisma.producto.delete({ where: { id } });
 };

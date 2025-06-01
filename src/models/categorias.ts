@@ -1,9 +1,9 @@
 import { IProducto } from "./producto";
 
 export interface ICategoria {
-  id: bigint;
+  id: number;
   activo?: boolean;
-  id_tipo?: bigint;
+  id_tipo?: number;
   nombre?: string;
   Producto?: IProducto[];
 }

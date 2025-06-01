@@ -7,7 +7,7 @@ export const getAllTalles = async () => {
   return await prisma.talle.findMany();
 };
 
-export const getTalleById = async (id: bigint) => {
+export const getTalleById = async (id: number) => {
   return await prisma.talle.findUnique({ where: { id } });
 };
 
@@ -21,13 +21,18 @@ export const createTalle = async (talle: ITalle) => {
   });
 };
 
-export const updateTalle = async (id: bigint, talle: Partial<ITalle>) => {
+export const updateTalle = async (id: number, talle: Partial<ITalle>) => {
   return await prisma.talle.update({
     where: { id },
-    data: talle,
+    data: {
+      ...(talle.activo !== undefined && { activo: talle.activo }),
+      ...(talle.tipo_talle !== undefined && { tipo_talle: talle.tipo_talle }),
+      ...(talle.tipo_id !== undefined && { tipo_id: talle.tipo_id }),
+    },
   });
 };
 
-export const deleteTalle = async (id: bigint) => {
+
+export const deleteTalle = async (id: number) => {
   return await prisma.talle.delete({ where: { id } });
 };

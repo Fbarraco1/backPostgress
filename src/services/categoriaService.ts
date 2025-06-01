@@ -23,9 +23,10 @@ export const createCategoria = async (categoria: ICategoria) => {
 };
 
 export const updateCategoria = async (id: bigint, categoria: Partial<ICategoria>) => {
+  const { Producto, ...categoriaSinProducto } = categoria;
   return await prisma.categoria.update({
     where: { id },
-    data: categoria,
+    data: categoriaSinProducto,
   });
 };
 

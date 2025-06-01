@@ -1,7 +1,7 @@
 import { IUsuarioDireccion } from "./usuarioDireccion";
 
 export interface IDireccion {
-  id: bigint;
+  id: number;
   activo?: boolean;
   calle?: string;
   cp?: string;

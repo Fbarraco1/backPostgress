@@ -2,10 +2,10 @@ import { IDireccion } from "./direccion";
 import { IUsuario } from "./usuario";
 
 export interface IUsuarioDireccion {
-  id: bigint;
+  id: number;
   activo?: boolean;
-  direccion_id?: bigint;
-  usuario_id?: bigint;
+  direccion_id?: number;
+  usuario_id?: number;
   Direccion?: IDireccion;
   Usuario?: IUsuario;
 }

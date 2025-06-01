@@ -2,10 +2,10 @@ import { IProducto } from "./producto";
 import { ITalle } from "./talle";
 
 export interface ITalleProducto {
-  id: bigint;
+  id: number;
   activo?: boolean;
-  producto_id?: bigint;
-  talle_id?: bigint;
+  producto_id?: number;
+  talle_id?: number;
   Producto?: IProducto;
   Talle?: ITalle;
 }

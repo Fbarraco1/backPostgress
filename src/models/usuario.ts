@@ -2,7 +2,7 @@ import { IOrdenDeCompra } from "./ordenDeCompra";
 import { IUsuarioDireccion } from "./usuarioDireccion";
 
 export interface IUsuario {
-  id: bigint;
+  id: number;
   activo?: boolean;
   contrasenia?: string;
   email?: string;

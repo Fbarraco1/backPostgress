@@ -2,10 +2,10 @@ import { ITalleProducto } from "./talleProducto";
 import { ITipo } from "./tipo";
 
 export interface ITalle {
-  id: bigint;
+  id: number;
   activo?: boolean;
   tipo_talle?: string;
-  tipo_id?: bigint;
+  tipo_id?: number;
   Tipo?: ITipo;
   TalleProducto?: ITalleProducto[];
 }

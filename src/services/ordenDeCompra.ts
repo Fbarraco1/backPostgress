@@ -7,7 +7,7 @@ export const getAllOrdenesDeCompra = async () => {
   return await prisma.ordenDeCompra.findMany();
 };
 
-export const getOrdenDeCompraById = async (id: bigint) => {
+export const getOrdenDeCompraById = async (id: number) => {
   return await prisma.ordenDeCompra.findUnique({ where: { id } });
 };
 
@@ -22,15 +22,20 @@ export const createOrdenDeCompra = async (orden: IOrdenDeCompra) => {
 };
 
 export const updateOrdenDeCompra = async (
-  id: bigint,
+  id: number,
   orden: Partial<IOrdenDeCompra>
 ) => {
   return await prisma.ordenDeCompra.update({
     where: { id },
-    data: orden,
+    data: {
+      activo: orden.activo,
+      fecha: orden.fecha,
+      ...(orden.usuario_id !== undefined && { usuario_id: orden.usuario_id }),
+    },
   });
 };
 
-export const deleteOrdenDeCompra = async (id: bigint) => {
+
+export const deleteOrdenDeCompra = async (id: number) => {
   return await prisma.ordenDeCompra.delete({ where: { id } });
 };

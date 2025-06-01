@@ -7,7 +7,7 @@ export const getAllUsuarioDirecciones = async () => {
   return await prisma.usuarioDireccion.findMany();
 };
 
-export const getUsuarioDireccionById = async (id: bigint) => {
+export const getUsuarioDireccionById = async (id: number) => {
   return await prisma.usuarioDireccion.findUnique({ where: { id } });
 };
 
@@ -22,7 +22,7 @@ export const createUsuarioDireccion = async (direccion: IUsuarioDireccion) => {
 };
 
 export const updateUsuarioDireccion = async (
-  id: bigint,
+  id: number,
   direccion: Partial<IUsuarioDireccion>
 ) => {
   return await prisma.usuarioDireccion.update({
@@ -35,6 +35,6 @@ export const updateUsuarioDireccion = async (
   });
 };
 
-export const deleteUsuarioDireccion = async (id: bigint) => {
+export const deleteUsuarioDireccion = async (id: number) => {
   return await prisma.usuarioDireccion.delete({ where: { id } });
 };

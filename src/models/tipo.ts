@@ -1,8 +1,8 @@
 import { ITalle } from "./talle";
 
 export interface ITipo {
-  id: number;
+  id?: number;
   activo?: boolean;
-  nombre?: string;
+  nombre: string;
   Talle?: ITalle[];
 }

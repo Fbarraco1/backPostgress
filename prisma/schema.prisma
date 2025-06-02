@@ -89,9 +89,9 @@ model TalleProducto {
 }
 
 model Tipo {
-  id     Int @id @default(autoincrement())
-  activo Boolean?
-  nombre String?
+  id     Int     @id @default(autoincrement())
+  activo Boolean @default(true)
+  nombre String  // obligatorio
   Talle  Talle[]
 }
 

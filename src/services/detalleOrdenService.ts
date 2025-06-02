@@ -7,7 +7,7 @@ export const getAllDetalleOrden = async () => {
   return await prisma.detalleOrden.findMany();
 };
 
-export const getDetalleOrdenById = async (id: bigint) => {
+export const getDetalleOrdenById = async (id: number) => {
   return await prisma.detalleOrden.findUnique({ where: { id } });
 };
 
@@ -22,7 +22,7 @@ export const createDetalleOrden = async (detalle: IDetalleOrden) => {
   });
 };
 
-export const updateDetalleOrden = async (id: bigint, detalle: Partial<IDetalleOrden>) => {
+export const updateDetalleOrden = async (id: number, detalle: Partial<IDetalleOrden>) => {
   const { Orden, Producto, ...dataUpdate } = detalle;
 
   return await prisma.detalleOrden.update({
@@ -31,6 +31,6 @@ export const updateDetalleOrden = async (id: bigint, detalle: Partial<IDetalleOr
   });
 };
 
-export const deleteDetalleOrden = async (id: bigint) => {
+export const deleteDetalleOrden = async (id: number) => {
   return await prisma.detalleOrden.delete({ where: { id } });
 };

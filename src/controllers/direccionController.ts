@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as direccionService from '../services/direccionService';
 
-export const getDirecciones = async (req: Request, res: Response) => {
+export const getDirecciones = async (_req: Request, res: Response) => {
   const direcciones = await direccionService.getAllDirecciones();
   res.json(direcciones);
 };
@@ -19,7 +19,7 @@ export const getDireccion = async (req: Request, res: Response) => {
     return res.status(404).json({ message: 'Dirección no encontrada' });
   }
 
-  res.json(direccion);
+  return res.json(direccion);
 };
 
 export const createDireccion = async (req: Request, res: Response) => {
@@ -40,9 +40,9 @@ export const updateDireccion = async (req: Request, res: Response) => {
     }
 
     const direccionActualizada = await direccionService.updateDireccion(id, req.body);
-    res.json(direccionActualizada);
+    return res.json(direccionActualizada);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -55,8 +55,8 @@ export const deleteDireccion = async (req: Request, res: Response) => {
     }
 
     await direccionService.deleteDireccion(id);
-    res.status(204).send();
+    return res.status(204).send();
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };

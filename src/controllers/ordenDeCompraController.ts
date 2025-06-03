@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as ordenDeCompraService from '../services/ordenDeCompraService';
 
-export const getOrdenesDeCompra = async (req: Request, res: Response) => {
+export const getOrdenesDeCompra = async (_req: Request, res: Response) => {
   const ordenes = await ordenDeCompraService.getAllOrdenesDeCompra();
   res.json(ordenes);
 };
@@ -19,7 +19,7 @@ export const getOrdenDeCompra = async (req: Request, res: Response) => {
     return res.status(404).json({ message: 'Orden no encontrada' });
   }
 
-  res.json(orden);
+  return res.json(orden);
 };
 
 export const createOrdenDeCompra = async (req: Request, res: Response) => {
@@ -40,9 +40,9 @@ export const updateOrdenDeCompra = async (req: Request, res: Response) => {
     }
 
     const ordenActualizada = await ordenDeCompraService.updateOrdenDeCompra(id, req.body);
-    res.json(ordenActualizada);
+    return res.json(ordenActualizada);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -55,8 +55,8 @@ export const deleteOrdenDeCompra = async (req: Request, res: Response) => {
     }
 
     await ordenDeCompraService.deleteOrdenDeCompra(id);
-    res.status(204).send();
+    return res.status(204).send();
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };

@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { IUsuario } from '../models/usuario';
+import { IUsuario, RolUsuario } from '../models/usuario';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -13,35 +13,41 @@ export const getUsuarioById = async (id: number) => {
 };
 
 export const createUsuario = async (usuario: IUsuario) => {
-  const hashedPassword = usuario.contrasenia
-    ? await bcrypt.hash(usuario.contrasenia, 10)
-    : undefined;
+  if (
+    usuario.contrasenia === undefined ||
+    usuario.nombre === undefined ||
+    usuario.email === undefined
+  ) {
+    throw new Error('La contraseña es obligatoria');
+  }
+
+  const hashedPassword = await bcrypt.hash(usuario.contrasenia, 10);
 
   return await prisma.usuario.create({
     data: {
       nombre: usuario.nombre,
       email: usuario.email,
       contrasenia: hashedPassword,
-      activo: usuario.activo,
-      rol: usuario.rol,
+      activo: usuario.activo ?? true,
+      rol: usuario.rol ? usuario.rol as RolUsuario : RolUsuario.USER,
     },
   });
 };
 
 export const updateUsuario = async (id: number, usuario: Partial<IUsuario>) => {
-  if (usuario.contrasenia) {
-    usuario.contrasenia = await bcrypt.hash(usuario.contrasenia, 10);
+  const dataUpdate: any = {};
+
+  if (usuario.nombre !== undefined) dataUpdate.nombre = usuario.nombre;
+  if (usuario.email !== undefined) dataUpdate.email = usuario.email;
+  if (usuario.contrasenia !== undefined) {
+    dataUpdate.contrasenia = await bcrypt.hash(usuario.contrasenia, 10);
   }
+  if (usuario.activo !== undefined) dataUpdate.activo = usuario.activo;
+  if (usuario.rol !== undefined) dataUpdate.rol = usuario.rol;
 
   return await prisma.usuario.update({
     where: { id },
-    data: {
-      nombre: usuario.nombre,
-      email: usuario.email,
-      contrasenia: usuario.contrasenia,
-      activo: usuario.activo,
-      rol: usuario.rol,
-    },
+    data: dataUpdate,
   });
 };
 

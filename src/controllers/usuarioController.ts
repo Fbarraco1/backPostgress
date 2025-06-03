@@ -13,7 +13,7 @@ export const getUsuario = async (req: Request, res: Response) => {
   const usuario = await usuarioService.getUsuarioById(id);
   if (!usuario) return res.status(404).json({ message: 'Usuario no encontrado' });
 
-  res.json(usuario);
+ return res.json(usuario);
 };
 
 export const createUsuario = async (req: Request, res: Response) => {
@@ -31,9 +31,9 @@ export const updateUsuario = async (req: Request, res: Response) => {
     if (isNaN(id)) return res.status(400).json({ message: 'ID inválido' });
 
     const actualizado = await usuarioService.updateUsuario(id, req.body);
-    res.json(actualizado);
+    return res.json(actualizado);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -43,8 +43,8 @@ export const deleteUsuario = async (req: Request, res: Response) => {
     if (isNaN(id)) return res.status(400).json({ message: 'ID inválido' });
 
     await usuarioService.deleteUsuario(id);
-    res.status(204).send();
+   return res.status(204).send();
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+   return res.status(400).json({ message: error.message });
   }
 };

@@ -12,9 +12,13 @@ export const getTalleById = async (id: number) => {
 };
 
 export const createTalle = async (talle: ITalle) => {
+  if (talle.tipo_talle === undefined || talle.tipo_id === undefined) {
+    throw new Error('Faltan campos obligatorios: tipo_talle y tipo_id');
+  }
+
   return await prisma.talle.create({
     data: {
-      activo: talle.activo,
+      activo: talle.activo ?? true,
       tipo_talle: talle.tipo_talle,
       tipo_id: talle.tipo_id,
     },
@@ -22,16 +26,17 @@ export const createTalle = async (talle: ITalle) => {
 };
 
 export const updateTalle = async (id: number, talle: Partial<ITalle>) => {
+  const dataUpdate: any = {};
+
+  if (talle.activo !== undefined) dataUpdate.activo = talle.activo;
+  if (talle.tipo_talle !== undefined) dataUpdate.tipo_talle = talle.tipo_talle;
+  if (talle.tipo_id !== undefined) dataUpdate.tipo_id = talle.tipo_id;
+
   return await prisma.talle.update({
     where: { id },
-    data: {
-      ...(talle.activo !== undefined && { activo: talle.activo }),
-      ...(talle.tipo_talle !== undefined && { tipo_talle: talle.tipo_talle }),
-      ...(talle.tipo_id !== undefined && { tipo_id: talle.tipo_id }),
-    },
+    data: dataUpdate,
   });
 };
-
 
 export const deleteTalle = async (id: number) => {
   return await prisma.talle.delete({ where: { id } });

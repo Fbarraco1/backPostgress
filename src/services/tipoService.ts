@@ -14,7 +14,7 @@ export const createTipo = async (data: { nombre: string; activo?: boolean }) => 
   return await prisma.tipo.create({
     data: {
       nombre,
-      activo, // ahora activo siempre es boolean, nunca undefined
+      activo, 
     },
   });
 };

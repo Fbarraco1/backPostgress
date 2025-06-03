@@ -14,6 +14,11 @@ import talleRouter from './routes/talleRoutes';
 import tipoRouter from './routes/tipoRoutes';
 import usuarioDireccionRouter from './routes/usuarioDireccion';
 import usuarioRouter from './routes/usuarioRoutes';
+import dotenv from 'dotenv';
+
+
+dotenv.config();
+const PORT_Node = process.env.PORT_Node || 8085;
 
 const app = express();
 export const prisma = new PrismaClient();
@@ -35,5 +40,12 @@ app.use('/api', talleRouter);
 app.use('/api', tipoRouter);
 app.use('/api', usuarioDireccionRouter);
 app.use('/api', usuarioRouter);
+
+console.log("Iniciando servidor...");
+
+// Si usas Express, por ejemplo:
+app.listen(PORT_Node, () => {
+  console.log(`Servidor escuchando en puerto ${PORT_Node}`);
+});
 
 export default app;

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as productoService from '../services/productoService';
 
-export const getProductos = async (req: Request, res: Response) => {
+export const getProductos = async (_req: Request, res: Response) => {
   const productos = await productoService.getAllProductos();
   res.json(productos);
 };
@@ -14,15 +14,15 @@ export const getProducto = async (req: Request, res: Response) => {
     return res.status(404).json({ message: 'Producto no encontrado' });
   }
 
-  res.json(producto);
+  return res.json(producto);
 };
 
 export const createProducto = async (req: Request, res: Response) => {
   try {
     const nuevoProducto = await productoService.createProducto(req.body);
-    res.status(201).json(nuevoProducto);
+    return res.status(201).json(nuevoProducto);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -30,9 +30,9 @@ export const updateProducto = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
     const productoActualizado = await productoService.updateProducto(id, req.body);
-    res.json(productoActualizado);
+    return res.json(productoActualizado);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 

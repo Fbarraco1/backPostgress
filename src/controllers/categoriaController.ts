@@ -1,7 +1,7 @@
 import {Request, Response} from "express"
 import * as categoriaService from '../services/categoriaService';
 
-export const getCategorias = async (req: Request, res: Response) => {
+export const getCategorias = async (_req: Request, res: Response) => {
   try {
     return res.status(200).json({"message": "Categorías obtenidas correctamente"});
   } catch (error: any) {

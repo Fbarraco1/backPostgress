@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as tipoService from '../services/tipoService';
 
-export const getTipos = async (req: Request, res: Response) => {
+export const getTipos = async (_req: Request, res: Response) => {
   try {
     const tipos = await tipoService.getAllTipos();
     return res.json(tipos);

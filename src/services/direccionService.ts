@@ -12,6 +12,14 @@ export const getDireccionById = async (id: number) => {
 };
 
 export const createDireccion = async (direccion: IDireccion) => {
+    if (
+    direccion.calle === undefined ||
+    direccion.cp === undefined ||
+    direccion.localidad === undefined
+  ) {
+    throw new Error('Faltan campos obligatorios');
+  }
+
   return await prisma.direccion.create({
     data: {
       calle: direccion.calle,

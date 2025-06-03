@@ -12,15 +12,24 @@ export const getDetalleOrdenById = async (id: number) => {
 };
 
 export const createDetalleOrden = async (detalle: IDetalleOrden) => {
+  if (
+    detalle.cantidad === undefined ||
+    detalle.orden_id === undefined ||
+    detalle.producto_id === undefined
+  ) {
+    throw new Error('Faltan campos obligatorios');
+  }
+
   return await prisma.detalleOrden.create({
     data: {
-      activo: detalle.activo,
+      activo: detalle.activo ?? true,
       cantidad: detalle.cantidad,
       orden_id: detalle.orden_id,
       producto_id: detalle.producto_id,
     },
   });
 };
+
 
 export const updateDetalleOrden = async (id: number, detalle: Partial<IDetalleOrden>) => {
   const { Orden, Producto, ...dataUpdate } = detalle;

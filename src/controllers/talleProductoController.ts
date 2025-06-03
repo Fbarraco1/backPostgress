@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import * as talleProductoService from '../services/talleProductoService';
 
-export const getTalleProductos = async (req: Request, res: Response) => {
+export const getTalleProductos = async (_req: Request, res: Response) => {
   const talles = await talleProductoService.getAllTalleProductos();
   res.json(talles);
 };
@@ -19,7 +19,7 @@ export const getTalleProducto = async (req: Request, res: Response) => {
     return res.status(404).json({ message: 'TalleProducto no encontrado' });
   }
 
-  res.json(talle);
+  return res.json(talle);
 };
 
 export const createTalleProducto = async (req: Request, res: Response) => {
@@ -40,9 +40,9 @@ export const updateTalleProducto = async (req: Request, res: Response) => {
     }
 
     const talleActualizado = await talleProductoService.updateTalleProducto(id, req.body);
-    res.json(talleActualizado);
+    return res.json(talleActualizado);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -55,8 +55,8 @@ export const deleteTalleProducto = async (req: Request, res: Response) => {
     }
 
     await talleProductoService.deleteTalleProducto(id);
-    res.status(204).send();
+    return res.status(204).send();
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+   return res.status(400).json({ message: error.message });
   }
 };

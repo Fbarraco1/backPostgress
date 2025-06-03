@@ -94,6 +94,10 @@ model Tipo {
   nombre String  // obligatorio
   Talle  Talle[]
 }
+enum RolUsuario {
+  USER
+  ADMIN
+}
 
 model Usuario {
   id               Int @id @default(autoincrement())
@@ -101,7 +105,7 @@ model Usuario {
   contrasenia      String?
   email            String?
   nombre           String?
-  rol              String?
+  rol              RolUsuario?
   OrdenDeCompra    OrdenDeCompra[]
   UsuarioDireccion UsuarioDireccion[]
 }

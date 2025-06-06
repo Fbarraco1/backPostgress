@@ -1,8 +1,9 @@
-import { ITalle } from "./talle";
+import { Producto } from "@prisma/client";
 
 export interface ITipo {
   id?: number;
   activo?: boolean;
   nombre: string;
-  Talle?: ITalle[];
+  idCategoria: number;
+  productos?: Producto[]; 
 }

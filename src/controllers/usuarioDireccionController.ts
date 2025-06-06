@@ -43,6 +43,17 @@ export const updateUsuarioDireccion = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarUsuarioDireccion = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const usuarioDirec = await usuarioDireccionService.desactivarUsuarioDireccion(Number(id));
+    res.status(200).json(usuarioDirec);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar la UsuarioDireccion', error });
+  }
+};
+
 export const deleteUsuarioDireccion = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

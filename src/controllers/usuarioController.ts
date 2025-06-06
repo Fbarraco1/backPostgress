@@ -37,6 +37,17 @@ export const updateUsuario = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarUsuario = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const usuario = await usuarioService.desactivarUsuario(Number(id));
+    res.status(200).json(usuario);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar el usuario', error });
+  }
+};
+
 export const deleteUsuario = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

@@ -40,6 +40,13 @@ export const updateDetalleOrden = async (id: number, detalle: Partial<IDetalleOr
   });
 };
 
+export const desactivarDetalleOrden = async (id: number) => {
+  return await prisma.detalleOrden.update({
+    where: { id },
+    data: { activo: false },
+  });
+};
+
 export const deleteDetalleOrden = async (id: number) => {
   return await prisma.detalleOrden.delete({ where: { id } });
 };

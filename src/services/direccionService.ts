@@ -25,6 +25,7 @@ export const createDireccion = async (direccion: IDireccion) => {
       calle: direccion.calle,
       cp: direccion.cp,
       localidad: direccion.localidad,
+      activo: direccion.activo ?? true
     },
   });
 };
@@ -38,6 +39,12 @@ export const updateDireccion = async (id: number, direccion: Partial<IDireccion>
   });
 };
 
+export const desactivarDireccion = async (id: number) => {
+  return await prisma.direccion.update({
+    where: { id },
+    data: { activo: false },
+  });
+};
 
 export const deleteDireccion = async (id: number) => {
   return await prisma.direccion.delete({ where: { id } });

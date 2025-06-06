@@ -8,5 +8,6 @@ router.get('/usuarioDirecciones/:id', usuarioDireccionController.getUsuarioDirec
 router.post('/usuarioDirecciones', usuarioDireccionController.createUsuarioDireccion);
 router.put('/usuarioDirecciones/:id', usuarioDireccionController.updateUsuarioDireccion);
 router.delete('/usuarioDirecciones/:id', usuarioDireccionController.deleteUsuarioDireccion);
+router.patch('/usuarioDirecciones/desactivar/:id', usuarioDireccionController.eliminarUsuarioDireccion);
 
 export default router;

@@ -8,5 +8,6 @@ router.get('/talles/:id', talleController.getTalle);
 router.post('/talles', talleController.createTalle);
 router.put('/talles/:id', talleController.updateTalle);
 router.delete('/talles/:id', talleController.deleteTalle);
+router.patch('/talles/desactivar/:id', talleController.eliminarTalle);
 
 export default router;

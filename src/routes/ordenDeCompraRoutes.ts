@@ -7,5 +7,6 @@ router.get('/ordenesCompra/:id', ordenDeCompraController.getOrdenDeCompra);
 router.post('/ordenesCompra', ordenDeCompraController.createOrdenDeCompra);
 router.put('/ordenesCompra/:id', ordenDeCompraController.updateOrdenDeCompra);
 router.delete('/ordenesCompra/:id', ordenDeCompraController.deleteOrdenDeCompra);
+router.patch('/ordenesCompra/desactivar/:id', ordenDeCompraController.eliminarOrdenDeCompra);
 
 export default router;

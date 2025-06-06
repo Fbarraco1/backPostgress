@@ -1,9 +1,10 @@
 import { IProducto } from "./producto";
+import { ITipo } from "./tipo";
 
 export interface ICategoria {
   id: number;
-  activo: boolean | null;
-  id_tipo: number | null;
-  nombre: string | null;
+  activo: boolean;
+  nombre: string;
   Producto: IProducto[];
+  Tipo: ITipo[];
 }

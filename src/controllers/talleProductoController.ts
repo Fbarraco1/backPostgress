@@ -46,6 +46,17 @@ export const updateTalleProducto = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarTalleProducto = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const talleProd = await talleProductoService.desactivarTalleProducto(Number(id));
+    res.status(200).json(talleProd);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar el TalleProd', error });
+  }
+};
+
 export const deleteTalleProducto = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

@@ -8,11 +8,11 @@ datasource db {
 }
 
 model Categoria {
-  id       Int    @id @default(autoincrement())
+  id       Int       @id @default(autoincrement())
   activo   Boolean?
-  id_tipo  Int?
   nombre   String?
   Producto Producto[]
+  Tipo     Tipo[]    // Campo inverso para la relación con Tipo
 }
 
 model DetalleOrden {
@@ -46,36 +46,34 @@ model ImagenProducto {
 }
 
 model OrdenDeCompra {
-  id          Int @id @default(autoincrement())
-  activo      Boolean?
-  fecha       DateTime?
-  usuario_id  Int?
-  Usuario     Usuario?        @relation(fields: [usuario_id], references: [id])
-  DetalleOrden DetalleOrden[]
+  id            Int @id @default(autoincrement())
+  activo        Boolean?
+  fecha         DateTime?
+  usuario_id    Int?
+  Usuario       Usuario?        @relation(fields: [usuario_id], references: [id])
+  DetalleOrden  DetalleOrden[]
 }
 
 model Producto {
-  id            Int @id @default(autoincrement())
-  activo        Boolean?
-  cantidad      Int?
-  color         String?
-  descripcion   String?
-  marca         String?
-  nombre        String?
-  precio        Float?
-  categoria_id  Int?
-  Categoria     Categoria?     @relation(fields: [categoria_id], references: [id])
+  id             Int @id @default(autoincrement())
+  activo         Boolean?
+  cantidad       Int?
+  color          String?
+  descripcion    String?
+  marca          String?
+  nombre         String?
+  precio         Float?
+  categoria_id   Int?
+  Categoria      Categoria?       @relation(fields: [categoria_id], references: [id])
   ImagenProducto ImagenProducto[]
-  DetalleOrden  DetalleOrden[]
-  TalleProducto TalleProducto[]
+  DetalleOrden   DetalleOrden[]
+  TalleProducto  TalleProducto[]
 }
 
 model Talle {
-  id          Int @id @default(autoincrement())
-  activo      Boolean?
-  tipo_talle  String?
-  tipo_id     Int?
-  Tipo        Tipo? @relation(fields: [tipo_id], references: [id])
+  id            Int @id @default(autoincrement())
+  activo        Boolean?
+  tipo_talle    String?
   TalleProducto TalleProducto[]
 }
 
@@ -89,11 +87,13 @@ model TalleProducto {
 }
 
 model Tipo {
-  id     Int     @id @default(autoincrement())
-  activo Boolean @default(true)
-  nombre String  // obligatorio
-  Talle  Talle[]
+  id           Int        @id @default(autoincrement())
+  activo       Boolean    @default(true)
+  nombre       String
+  idCategoria  Int
+  Categoria    Categoria  @relation(fields: [idCategoria], references: [id])
 }
+
 enum RolUsuario {
   USER
   ADMIN

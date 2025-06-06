@@ -41,6 +41,13 @@ export const updateTalleProducto = async (
   });
 };
 
+export const desactivarTalleProducto = async (id: number) => {
+  return await prisma.talleProducto.update({
+    where: { id },
+    data: { activo: false },
+  });
+};
+
 export const deleteTalleProducto = async (id: number) => {
   return await prisma.talleProducto.delete({ where: { id } });
 };

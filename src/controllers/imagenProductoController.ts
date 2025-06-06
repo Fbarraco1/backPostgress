@@ -46,6 +46,17 @@ export const updateImagenProducto = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarImagenProducto = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const imagenProd = await imagenProductoService.desactivarImagenProducto(Number(id));
+    res.status(200).json(imagenProd);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar la imagenProducto', error });
+  }
+};
+
 export const deleteImagenProducto = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

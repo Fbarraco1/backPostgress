@@ -40,7 +40,14 @@ export const updateOrdenDeCompra = async (
 
   return await prisma.ordenDeCompra.update({
     where: { id },
-    data: dataUpdate,
+    data: dataUpdate
+  });
+};
+
+export const desactivarOrdenDeCompra = async (id: number) => {
+  return await prisma.ordenDeCompra.update({
+    where: { id },
+    data: { activo: false },
   });
 };
 

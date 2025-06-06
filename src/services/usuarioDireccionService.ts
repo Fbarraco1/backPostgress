@@ -41,6 +41,13 @@ export const updateUsuarioDireccion = async (
   });
 };
 
+export const desactivarUsuarioDireccion = async (id: number) => {
+  return await prisma.usuarioDireccion.update({
+    where: { id },
+    data: { activo: false },
+  });
+};
+
 export const deleteUsuarioDireccion = async (id: number) => {
   return await prisma.usuarioDireccion.delete({ where: { id } });
 };

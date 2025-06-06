@@ -46,6 +46,17 @@ export const updateDetalleOrden = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarDetalleOrden = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const detalle = await detalleOrdenService.desactivarDetalleOrden(Number(id));
+    res.status(200).json(detalle);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar el detalleOrden', error });
+  }
+};
+
 export const deleteDetalleOrden = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

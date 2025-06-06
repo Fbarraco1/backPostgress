@@ -51,6 +51,12 @@ export const updateImagenProducto = async (
     data: dataUpdate,
   });
 };
+export const desactivarImagenProducto = async (id: number) => {
+  return await prisma.imagenProducto.update({
+    where: { id },
+    data: { activo: false },
+  });
+};
 
 export const deleteImagenProducto = async (id: number) => {
   return await prisma.imagenProducto.delete({ where: { id } });

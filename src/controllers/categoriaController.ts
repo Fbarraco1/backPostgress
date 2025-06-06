@@ -3,7 +3,8 @@ import * as categoriaService from '../services/categoriaService';
 
 export const getCategorias = async (_req: Request, res: Response) => {
   try {
-    return res.status(200).json({"message": "Categorías obtenidas correctamente"});
+    const categorias = await categoriaService.getAllCategorias();
+    return res.status(200).json( categorias );
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
@@ -52,6 +53,17 @@ export const updateCategoria = async (req: Request, res: Response) => {
     return res.json(categoriaActualizada);
   } catch (error: any) {
     return res.status(400).json({ message: error.message });
+  }
+};
+
+export const eliminarCategoria = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const categoria = await categoriaService.desactivarCategoria(Number(id));
+    res.status(200).json(categoria);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar la categoria', error });
   }
 };
 

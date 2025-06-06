@@ -8,5 +8,6 @@ router.get('/direcciones/:id', direccionController.getDireccion);
 router.post('/direcciones', direccionController.createDireccion);
 router.put('/direcciones/:id', direccionController.updateDireccion);
 router.delete('/direcciones/:id', direccionController.deleteDireccion);
+router.patch('/direcciones/desactivar/:id', direccionController.eliminarDireccion);
 
 export default router;

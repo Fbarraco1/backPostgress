@@ -46,6 +46,17 @@ export const updateDireccion = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarDireccion = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const direccion = await direccionService.desactivarDireccion(Number(id));
+    res.status(200).json(direccion);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar la direcion', error });
+  }
+};
+
 export const deleteDireccion = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

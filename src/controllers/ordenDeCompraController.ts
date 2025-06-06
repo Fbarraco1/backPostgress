@@ -46,6 +46,17 @@ export const updateOrdenDeCompra = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarOrdenDeCompra = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const orden = await ordenDeCompraService.desactivarOrdenDeCompra(Number(id));
+    res.status(200).json(orden);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar la orden de compra', error });
+  }
+};
+
 export const deleteOrdenDeCompra = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

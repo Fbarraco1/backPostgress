@@ -51,6 +51,13 @@ export const updateUsuario = async (id: number, usuario: Partial<IUsuario>) => {
   });
 };
 
+export const desactivarUsuario = async (id: number) => {
+  return await prisma.usuario.update({
+    where: { id },
+    data: { activo: false },
+  });
+};
+
 export const deleteUsuario = async (id: number) => {
   return await prisma.usuario.delete({ where: { id } });
 };

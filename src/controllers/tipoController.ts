@@ -51,6 +51,17 @@ export const updateTipo = async (req: Request, res: Response) => {
   }
 };
 
+export const eliminarTipo = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const tipo = await tipoService.desactivarTipo(Number(id));
+    res.status(200).json(tipo);
+  } catch (error) {
+    res.status(400).json({ message: 'Error al desactivar el tipo', error });
+  }
+};
+
 export const deleteTipo = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);

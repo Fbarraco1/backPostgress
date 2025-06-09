@@ -15,6 +15,8 @@ import tipoRouter from './routes/tipoRoutes';
 import usuarioDireccionRouter from './routes/usuarioDireccion';
 import usuarioRouter from './routes/usuarioRoutes';
 import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes';
+
 
 
 dotenv.config();
@@ -40,6 +42,8 @@ app.use('/api', talleRouter);
 app.use('/api', tipoRouter);
 app.use('/api', usuarioDireccionRouter);
 app.use('/api', usuarioRouter);
+app.use('/api/auth', authRoutes);
+
 
 console.log("Iniciando servidor...");
 

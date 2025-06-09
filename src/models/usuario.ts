@@ -9,8 +9,8 @@ export enum RolUsuario {
 export interface IUsuario {
   id: number;
   activo?: boolean;
-  contrasenia?: string;
-  email?: string;
+  contrasenia: string;
+  email: string;
   nombre?: string;
   rol?: RolUsuario;
   OrdenDeCompra?: IOrdenDeCompra[];

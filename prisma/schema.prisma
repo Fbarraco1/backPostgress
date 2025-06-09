@@ -102,8 +102,8 @@ enum RolUsuario {
 model Usuario {
   id               Int @id @default(autoincrement())
   activo           Boolean?
-  contrasenia      String?
-  email            String?
+  contrasenia      String
+  email            String @unique
   nombre           String?
   rol              RolUsuario?
   OrdenDeCompra    OrdenDeCompra[]

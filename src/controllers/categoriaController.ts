@@ -33,6 +33,17 @@ export const getCategoria = async (req: Request, res: Response) => {
 export const createCategoria = async (req: Request, res: Response) => {
   try {
     const { id, Producto, ...categoriaData } = req.body;
+       
+    if (id !== undefined) {
+      return res.status(400).json({ message: "No se permite enviar un ID" });
+    }
+
+    if (typeof categoriaData.nombre !== "string" || categoriaData.nombre.trim() === "") {
+      return res
+        .status(400)
+        .json({ message: "El campo 'nombre' es obligatorio y debe ser un string no vacío" });
+    }
+
     const nuevaCategoria = await categoriaService.createCategoria(categoriaData);
     return res.status(201).json(nuevaCategoria);
   } catch (error: any) {
@@ -48,7 +59,6 @@ export const updateCategoria = async (req: Request, res: Response) => {
   }
 
   try {
-    // Opcional: puedes hacer validación o limpieza de req.body antes de enviar
     const categoriaActualizada = await categoriaService.updateCategoria(id, req.body);
     return res.json(categoriaActualizada);
   } catch (error: any) {
